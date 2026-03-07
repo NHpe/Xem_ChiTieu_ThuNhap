@@ -1,8 +1,8 @@
 const request = require('supertest');
 const express = require('express');
-const userRoute = require('../src/routes/userRoute');
+const userRoute = require('../routes/userRoute');
 const crypto = require('crypto');
-const User = require('../src/models/User');
+const User = require('../models/User');
 
 const connectDB = require('../src/config/db');
 connectDB();
