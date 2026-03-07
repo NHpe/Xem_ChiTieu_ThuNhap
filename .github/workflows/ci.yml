@@ -1,0 +1,39 @@
+name: CI Testing Pipeline
+
+# Thực hiện pipeline khi có push hoặc pull request vào nhánh "test"
+on:
+  push:
+    branches: [ "test" ]
+  pull_request:
+    branches: [ "test" ]
+
+jobs:
+  test-backend:
+    runs-on: ubuntu-latest
+    
+    # Khởi tạo một MongoDB ảo trên server GitHub để test
+    services:
+      mongodb:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        working-directory: ./backend
+        run: npm install
+
+      - name: Run Backend Tests
+        working-directory: ./backend
+        run: npm run test
+        env:
+          # Ép biến môi trường lúc test trỏ vào MongoDB ảo của GitHub
+          MONGO_URI: mongodb://localhost:27017/expense_test_db
