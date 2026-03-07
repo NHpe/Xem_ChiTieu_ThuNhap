@@ -27,9 +27,10 @@ describe('POST /api/users/register', () => {
 
         const response = await request(app)
             .post('/api/users/register')
-            .send(userData)
-            .expect(response.statusCode).toBe(201)
-            expect(response.body).toHaveProperty('message', 'Đăng ký thành công');
+            .send(userData);
+
+        expect(response.statusCode).toBe(201);
+        expect(response.body).toHaveProperty('message', 'Đăng ký thành công');
     });
 
     it('Đăng ký người dùng thất bại khi username đã tồn tại', async () => {
@@ -40,9 +41,10 @@ describe('POST /api/users/register', () => {
 
         const response = await request(app)
             .post('/api/users/register')
-            .send(userData)
-            .expect(400)
-            .expect(response.body).toHaveProperty('message', 'Tên đăng nhập đã tồn tại');
+            .send(userData);
+
+        expect(response.statusCode).toBe(400);
+        expect(response.body).toHaveProperty('message', 'Tên đăng nhập đã tồn tại');
     });
 });
 
@@ -56,9 +58,10 @@ describe('POST /api/users/login', () => {
 
         const response = await request(app)
             .post('/api/users/login')
-            .send(userData)
-            .expect(200)
-            .expect(response.body).toHaveProperty('message', 'Đăng nhập thành công');
+            .send(userData);
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toHaveProperty('message', 'Đăng nhập thành công');
     });
 
     it('Đăng nhập người dùng thất bại khi không tồn tại tên đăng nhập', async () => {
@@ -69,9 +72,10 @@ describe('POST /api/users/login', () => {
 
         const response = await request(app)
             .post('/api/users/login')
-            .send(userData)
-            .expect(400)
-            .expect(response.body).toHaveProperty('message', 'Tên đăng nhập hoặc mật khẩu không đúng');
+            .send(userData);
+
+        expect(response.statusCode).toBe(400);
+        expect(response.body).toHaveProperty('message', 'Tên đăng nhập hoặc mật khẩu không đúng');
     });
 
     it('Đăng nhập người dùng thất bại khi mật khẩu sai', async () => {
@@ -82,8 +86,9 @@ describe('POST /api/users/login', () => {
 
         const response = await request(app)
             .post('/api/users/login')
-            .send(userData)
-            .expect(400)
-            .expect(response.body).toHaveProperty('message', 'Tên đăng nhập hoặc mật khẩu không đúng');
+            .send(userData);
+
+        expect(response.statusCode).toBe(400);
+        expect(response.body).toHaveProperty('message', 'Tên đăng nhập hoặc mật khẩu không đúng');
     });
 });
