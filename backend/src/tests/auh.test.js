@@ -4,7 +4,7 @@ const userRoute = require('../routes/userRoute');
 const crypto = require('crypto');
 const User = require('../models/User');
 
-const connectDB = require('../src/config/db');
+const connectDB = require('../config/db');
 connectDB();
 
 // Tạo một instance của ứng dụng Express
