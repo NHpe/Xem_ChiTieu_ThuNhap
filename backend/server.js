@@ -7,15 +7,9 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const connectDB = require('./config/db');
 
-// Kết nối MongoDB
-const mongoose = require('mongoose');
-const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
-const connectDB = () => {
-    mongoose.connect(process.env.MONGO_URI, clientOptions)
-    .then(() => console.log('Kết nối MongoDB thành công'))
-    .catch((err) => console.error('Lỗi kết nối MongoDB:', err));
-};
+// Kết nối đến cơ sở dữ liệu MongoDB
 connectDB();
 
 // Khởi tạo Express app
