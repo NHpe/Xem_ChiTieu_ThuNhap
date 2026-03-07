@@ -28,8 +28,8 @@ describe('POST /api/users/register', () => {
         const response = await request(app)
             .post('/api/users/register')
             .send(userData)
-            .expect(201)
-            .expect(response.body.message).toBe('Đăng ký thành công');
+            .expect(response.statusCode).toBe(201)
+            expect(response.body).toHaveProperty('message', 'Đăng ký thành công');
     });
 
     it('Đăng ký người dùng thất bại khi username đã tồn tại', async () => {
@@ -42,7 +42,7 @@ describe('POST /api/users/register', () => {
             .post('/api/users/register')
             .send(userData)
             .expect(400)
-            .expect(response.body.message).toBe('Tên đăng nhập đã tồn tại');
+            .expect(response.body).toHaveProperty('message', 'Tên đăng nhập đã tồn tại');
     });
 });
 
@@ -58,7 +58,7 @@ describe('POST /api/users/login', () => {
             .post('/api/users/login')
             .send(userData)
             .expect(200)
-            .expect(response.body.message).toBe('Đăng nhập thành công');
+            .expect(response.body).toHaveProperty('message', 'Đăng nhập thành công');
     });
 
     it('Đăng nhập người dùng thất bại khi không tồn tại tên đăng nhập', async () => {
@@ -71,7 +71,7 @@ describe('POST /api/users/login', () => {
             .post('/api/users/login')
             .send(userData)
             .expect(400)
-            .expect(response.body.message).toBe('Tên đăng nhập hoặc mật khẩu không đúng');
+            .expect(response.body).toHaveProperty('message', 'Tên đăng nhập hoặc mật khẩu không đúng');
     });
 
     it('Đăng nhập người dùng thất bại khi mật khẩu sai', async () => {
@@ -84,6 +84,6 @@ describe('POST /api/users/login', () => {
             .post('/api/users/login')
             .send(userData)
             .expect(400)
-            .expect(response.body.message).toBe('Tên đăng nhập hoặc mật khẩu không đúng');
+            .expect(response.body).toHaveProperty('message', 'Tên đăng nhập hoặc mật khẩu không đúng');
     });
 });
