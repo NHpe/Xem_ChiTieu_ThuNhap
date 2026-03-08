@@ -1,5 +1,4 @@
 const User = require('../models/User');
-const crypto = require('crypto');
 
 class UserController {
     // Đăng ký người dùng mới
@@ -12,11 +11,8 @@ class UserController {
                 return res.status(400).json({ message: 'Tên đăng nhập đã tồn tại' });
             }
 
-            // Mã hóa mật khẩu  
-            const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
-
             // Tạo người dùng mới
-            const newUser = new User({ username, password: hashedPassword });
+            const newUser = new User({ username, password });
             await newUser.save();
 
             res.status(201).json({ message: 'Đăng ký thành công' });
@@ -36,8 +32,7 @@ class UserController {
             }
 
             // So sánh mật khẩu
-            const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
-            if (user.password !== hashedPassword) {
+            if (user.password !== password) {
                 return res.status(400).json({ message: 'Tên đăng nhập hoặc mật khẩu không đúng' });
             }
 

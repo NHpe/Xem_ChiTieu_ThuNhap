@@ -9,6 +9,7 @@ on:
 
 jobs:
   test-backend:
+    name: Backend Tests
     runs-on: ubuntu-latest
     
     # Khởi tạo một MongoDB ảo trên server GitHub để test
@@ -37,3 +38,26 @@ jobs:
         env:
           # Ép biến môi trường lúc test trỏ vào MongoDB ảo của GitHub
           MONGO_URI: mongodb://localhost:27017/expense_test_db
+  
+  test-frontend:
+    name: Frontend Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: './frontend/package-lock.json'
+
+      - name: Install Frontend Dependencies
+        working-directory: ./frontend
+        run: npm ci
+
+      - name: Run Frontend Tests
+        working-directory: ./frontend
+        run: npm run test:ci

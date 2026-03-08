@@ -1,0 +1,105 @@
+/* frontend/src/pages/Auth.css */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8fafc; /* Trắng xám nhẹ cho nền để khối form nổi bật */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.auth-card {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(107, 33, 168, 0.1); /* Bóng đổ ánh tím nhẹ */
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.auth-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.app-title {
+  color: #6b21a8; /* Tông tím đậm chuẩn màu chủ đạo */
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-shadow: 2px 2px 4px rgba(107, 33, 168, 0.15); /* Đổ bóng nhẹ cho chữ nổi bật */
+}
+
+.auth-title {
+  color: #6b21a8; /* Tím đậm */
+  margin-bottom: 24px;
+  font-size: 24px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-input {
+  padding: 12px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.auth-input:focus {
+  border-color: #9333ea; /* Viền tím sáng khi click vào */
+  box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+}
+
+.auth-button {
+  background-color: #6b21a8;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.auth-button:hover {
+  background-color: #581c87; /* Tím tối hơn khi hover */
+}
+
+.auth-switch {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #64748b;
+}
+
+.auth-switch span {
+  color: #9333ea;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.auth-switch span:hover {
+  text-decoration: underline;
+}
+
+.auth-message {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #dc2626; /* Màu đỏ cho lỗi */
+}
+
+.auth-message.success {
+  color: #16a34a; /* Màu xanh cho thành công */
+}

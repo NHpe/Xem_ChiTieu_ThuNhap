@@ -1,10 +1,9 @@
 const request = require('supertest');
 const express = require('express');
 const userRoute = require('../routes/userRoute');
-const crypto = require('crypto');
 const User = require('../models/User');
 
-const connectDB = require('../config/db');
+const {connectDB, disconnectDB} = require('../config/db');
 connectDB();
 
 // Tạo một instance của ứng dụng Express
@@ -15,6 +14,8 @@ app.use('/api/users', userRoute);
 // Xóa test user sau khi test hoàn thành
 afterAll(async () => {
     await User.deleteOne({ username: 'test_user_1' });
+    // Đóng kết nối đến cơ sở dữ liệu sau khi hoàn thành tất cả các test
+    disconnectDB();
 });
 
 // Thực hiện test đăng ký người dùng

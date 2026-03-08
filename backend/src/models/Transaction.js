@@ -16,10 +16,8 @@ const transactionSchema = new mongoose.Schema({
         required: true,
     },
     amount: { // Số tiền
-        type: Number,
+        type: String,
         required: true,
-        min: 0,
-        default: 0,
     },
     date: { // Ngày giao dịch
         type: Date,

@@ -19,6 +19,11 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 // Định nghĩa các route
+const userRoute = require('./routes/userRoute');
+const transactionRoute = require('./routes/transactionRoute');
+
+app.use('/api/users', userRoute);
+app.use('/api/transactions', transactionRoute);
 app.get('/', (req, res) => {
     res.send('API đang hoạt động');
 });
