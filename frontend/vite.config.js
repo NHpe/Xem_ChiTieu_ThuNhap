@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   test: {
-    environment: 'jsdom', // Bật trình duyệt ảo
+    environment: 'happy-dom', // Bật trình duyệt ảo
     globals: true,        // Dùng các hàm describe, it, expect mà không cần import
     setupFiles: './src/setupTests.js', // File chạy trước khi test
   }
