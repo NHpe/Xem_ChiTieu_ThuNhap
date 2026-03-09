@@ -1,9 +1,21 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { beforeAll, afterAll, afterEach, describe, it, expect } from 'vitest';
+import { beforeAll, afterAll, afterEach, describe, it, expect, vi } from 'vitest';
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 import Auth from '../pages/Auth';
+
+// Mock useNavigate để kiểm tra điều hướng sau khi đăng nhập thành công
+const mockedNavigate = vi.fn(); 
+
+vi.mock('react-router-dom', async () => {
+  // Lấy tất cả các tính năng thật (actual) của thư viện để không làm hỏng các hook khác
+  const actual = await vi.importActual('react-router-dom'); 
+  return {
+    ...actual,
+    useNavigate: () => mockedNavigate,
+  };
+});
 
 // Thiết lập MSW
 const server = setupServer(
@@ -138,6 +150,7 @@ describe('Test chức năng đăng nhập', () => {
         await waitFor(() => {
             const successMessage = screen.getByText(/Đăng nhập thành công/i);
             expect(successMessage).toBeInTheDocument();
+            expect(mockedNavigate).toHaveBeenCalledWith('/dashboard');
         });
     });
 
@@ -149,6 +162,7 @@ describe('Test chức năng đăng nhập', () => {
         await waitFor(() => {
             const errorMessage = screen.getByText(/Vui lòng điền đầy đủ thông tin/i);
             expect(errorMessage).toBeInTheDocument();
+            expect(mockedNavigate).not.toHaveBeenCalled();
         });
     });
 
@@ -176,6 +190,7 @@ describe('Test chức năng đăng nhập', () => {
         await waitFor(() => {
             const errorMessage = screen.getByText(/Tên đăng nhập hoặc mật khẩu không đúng/i);
             expect(errorMessage).toBeInTheDocument();
+            expect(mockedNavigate).not.toHaveBeenCalled();
         });
     });
 });

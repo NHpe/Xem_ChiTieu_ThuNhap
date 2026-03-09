@@ -9,9 +9,7 @@ const connectDB = () => {
 };
 
 const disconnectDB = async() => {
-    await mongoose.disconnect()
-    .then(() => console.log('Đã ngắt kết nối MongoDB'))
-    .catch((err) => console.error('Lỗi ngắt kết nối MongoDB:', err));
+    await mongoose.disconnect();
 };
 
 module.exports = { connectDB, disconnectDB };
