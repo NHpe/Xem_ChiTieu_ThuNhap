@@ -49,13 +49,13 @@ describe('Test chức năng đăng ký', () => {
         render(<Auth />);
 
         // Chọn tab Đăng ký
-        const registerTab = screen.getByRole('div', { name: /Đăng ký tài khoản/i });
-        userEvent.click(registerTab);
+        const registerTab = screen.getByText(/Đăng ký tài khoản/i);
+        userEvent.click(registerTab);   
 
         // Điền thông tin đăng ký
-        const usernameInput = screen.getByLabelText(/Tên đăng nhập/i);
-        const passwordInput = screen.getByLabelText(/Mật khẩu/i);
-        const confirmPasswordInput = screen.getByLabelText(/Nhập lại mật khẩu/i);
+        const usernameInput = screen.getByPlaceholderText(/Tên đăng nhập/i);
+        const passwordInput = screen.getAllByPlaceholderText(/Mật khẩu/i);
+        const confirmPasswordInput = screen.getAllByPlaceholderText(/Nhập lại mật khẩu/i);
         const registerButton = screen.getByRole('button', { name: /Đăng ký/i });
 
         userEvent.type(usernameInput, 'testuser');
@@ -65,15 +65,16 @@ describe('Test chức năng đăng ký', () => {
 
         // Chờ đợi thông báo thành công
         await waitFor(() => {
-            const successMessage = screen.getByText(/Đăng ký thành công! Vui lòng đăng nhập./i);
+            const successMessage = screen.getByText(/Đăng ký thành công. Vui lòng đăng nhập lại/i);
             expect(successMessage).toBeInTheDocument();
         });
     });
 
     it('Dăng ký thất bại do thiếu thông tin', async () => {
         render(<Auth />);
-        const registerTab = screen.getByRole('div', { name: /Đăng ký tài khoản/i });
-        userEvent.click(registerTab);
+        // Chọn tab Đăng ký
+        const registerTab = screen.getByText(/Đăng ký tài khoản/i);
+        userEvent.click(registerTab); 
 
         const registerButton = screen.getByRole('button', { name: /Đăng ký/i });
         userEvent.click(registerButton);
@@ -85,12 +86,13 @@ describe('Test chức năng đăng ký', () => {
 
     it('Đăng ký thất bại do mật khẩu không khớp', async () => {
         render(<Auth />);
-        const registerTab = screen.getByRole('div', { name: /Đăng ký tài khoản/i });
-        userEvent.click(registerTab);
+        // Chọn tab Đăng ký
+        const registerTab = screen.getByText(/Đăng ký tài khoản/i);
+        userEvent.click(registerTab); 
 
-        const usernameInput = screen.getByLabelText(/Tên đăng nhập/i);
-        const passwordInput = screen.getByLabelText(/Mật khẩu/i);
-        const confirmPasswordInput = screen.getByLabelText(/Nhập lại mật khẩu/i);
+        const usernameInput = screen.getByPlaceholderText(/Tên đăng nhập/i);
+        const passwordInput = screen.getByPlaceholderText(/Mật khẩu/i);
+        const confirmPasswordInput = screen.getByPlaceholderText(/Nhập lại mật khẩu/i);
         const registerButton = screen.getByRole('button', { name: /Đăng ký/i });
 
         userEvent.type(usernameInput, 'testuser');
@@ -115,8 +117,9 @@ describe('Test chức năng đăng ký', () => {
             })
         );
         render(<Auth />);
-        const registerTab = screen.getByRole('div', { name: /Đăng ký tài khoản/i });
-        userEvent.click(registerTab);
+        // Chọn tab Đăng ký
+        const registerTab = screen.getByText(/Đăng ký tài khoản/i);
+        userEvent.click(registerTab); 
 
         const usernameInput = screen.getByLabelText(/Tên đăng nhập/i);
         const passwordInput = screen.getByLabelText(/Mật khẩu/i);
@@ -139,8 +142,8 @@ describe('Test chức năng đăng nhập', () => {
     it('Đăng nhập thành công', async () => {
         render(<Auth />);
 
-        const usernameInput = screen.getByLabelText(/Tên đăng nhập/i);
-        const passwordInput = screen.getByLabelText(/Mật khẩu/i);
+        const usernameInput = screen.getByPlaceholderText(/Tên đăng nhập/i);
+        const passwordInput = screen.getByPlaceholderText(/Mật khẩu/i);
         const loginButton = screen.getByRole('button', { name: /Đăng nhập/i });
 
         userEvent.type(usernameInput, 'testuser');
@@ -179,8 +182,8 @@ describe('Test chức năng đăng nhập', () => {
 
         render(<Auth />);
 
-        const usernameInput = screen.getByLabelText(/Tên đăng nhập/i);
-        const passwordInput = screen.getByLabelText(/Mật khẩu/i);
+        const usernameInput = screen.getAllByPlaceholderText(/Tên đăng nhập/i);
+        const passwordInput = screen.getByPlaceholderText(/Mật khẩu/i);
         const loginButton = screen.getByRole('button', { name: /Đăng nhập/i });
 
         userEvent.type(usernameInput, 'wronguser');
