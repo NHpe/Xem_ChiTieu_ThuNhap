@@ -8,10 +8,9 @@ const connectDB = () => {
     .catch((err) => console.error('Lỗi kết nối MongoDB:', err));
 };
 
-const disconnectDB = () => {
-    mongoose.disconnect()
-    .then(() => console.log('Đóng kết nối MongoDB thành công'))
-    .catch((err) => console.error('Lỗi đóng kết nối MongoDB:', err));
-}
+const disconnectDB = async() => {
+    await mongoose.disconnect();
+    console.log('Đóng kết nối MongoDB thành công');
+};
 
 module.exports = { connectDB, disconnectDB };
