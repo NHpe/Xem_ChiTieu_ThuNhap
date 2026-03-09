@@ -1,10 +1,18 @@
 const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
 const User = require('../models/User');
 const passport = require('passport');
 
+// Cấu hình Passport để sử dụng JWT
+const cookieExtractor = function(req) {
+    let token = null;
+    if (req && req.cookies) {
+        token = req.cookies['token'];
+    }
+    return token;
+}
+
 const opts = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    jwtFromRequest: cookieExtractor,
     secretOrKey: process.env.JWT_SECRET || 'test_secret_key'
 }
 

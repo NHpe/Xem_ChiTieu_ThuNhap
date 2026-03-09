@@ -7,6 +7,7 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
 
 // Kết nối đến cơ sở dữ liệu MongoDB
@@ -14,7 +15,12 @@ connectDB();
 
 // Khởi tạo Express app
 const app = express();
-app.use(cors());
+app.use(cors(
+    {
+        credentials: true
+    }
+));
+app.use(cookieParser());
 app.use(express.json());
 app.use(bodyParser.json());
 

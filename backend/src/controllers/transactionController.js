@@ -37,4 +37,4 @@ class TransactionController {
     }
 }
 
-module.exports = new TransactionController();s
+module.exports = new TransactionController();

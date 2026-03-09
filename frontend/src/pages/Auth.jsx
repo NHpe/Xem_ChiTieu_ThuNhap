@@ -30,7 +30,10 @@ function Auth() {
                 }
 
                 const hashedPassword = hashPassword(password);
-                const response = await axios.post('/api/users/register', { username, password: hashedPassword });
+                const response = await axios.post('/api/users/register', 
+                  { username, password: hashedPassword },
+                  { withCredentials: true }
+                );
                 
                 if (response.status === 201) {
                     setMessage({ text: 'Đăng ký thành công. Vui lòng đăng nhập lại', type: 'success' });
@@ -45,7 +48,10 @@ function Auth() {
         } else {
             try {
                 const hashedPassword = hashPassword(password);
-                const response = await axios.post('/api/users/login', { username, password: hashedPassword });
+                const response = await axios.post('/api/users/login', 
+                  { username, password: hashedPassword },
+                  { withCredentials: true }
+                );
 
                 if (response.status === 200) {
                     setMessage({ text: 'Đăng nhập thành công', type: 'success' });
